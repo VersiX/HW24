@@ -7,304 +7,273 @@ function ClearOut() {
 }
 
 
-//Подсчитать сумму всех чисел в заданном пользователем диапазоне.
+//Написать функцию, которая принимает 2 числа и возвращает
+// -1, если первое меньше, чем второе;
+// 1 – если первое больше, чем второе; 
+//и 0 – если числа равны.
 
-function func1() {
+function func1(num1, num2) {
+    switch (true) {
+        case num1 > num2: return 1;
+        case num1 < num2: return -1;
+        case num1 == num2: return 0;
+
+        default:
+            break;
+    }
+}
+
+function task1() {
     Out("Task 1:");
 
-    let left = Number(prompt("Enter first number"));
-    let right = Number(prompt("Enter second number"));
-    let sum = 0;
+    let num1 = Number(prompt("Please enter first number:"));
+    let num2 = Number(prompt("Please enter second number:"));
 
-    if (right < left) {
-        let temp = left;
-        left = right;
-        right = temp;
+    switch (func1(num1, num2)) {
+        case 1:
+            Out(`${num1} is bigger than ${num2}`);
+            break;
+        case -1:
+            Out(`${num2} is bigger than ${num1}`);
+            break;
+        case 1:
+            Out(`${num1} is equal to ${num2}`);
+            break;
+        default:
+            break;
     }
-
-    for (let i = left; i <= right; i++) {
-        sum += i;
-        Out(`sum + ${i} = ${sum}`);
-    }
-
-    Out(`Finall sum of numbers = ${sum}`);
-
 
 }
 
-// Запросить 2 числа и найти только наибольший общий делитель.
+// Написать функцию, которая вычисляет факториал переданного ей числа.
 
-function func2() {
+function func2(num) {
+    if (num == 1) {
+        return 1;
+    } else if (num > 1) {
+        return num * func2(num - 1);
+    } else {
+        return null;
+    }
+}
+
+function task2() {
     Out("Task 2:");
-    let first = Number(prompt("Enter first number"));
-    let second = Number(prompt("Enter second number"));
-
-    let result = Math.min(Math.abs(first), Math.abs(second));
-
-    while (((first % result)) || ((second % result))) {
-        result--;
-    }
-
-    Out(`Result = ${result}`);
+    let num = Number(prompt("Please enter number:"));
+    Out("Result = " + func2(num));
 
 }
 
-// Запросить у пользователя число и вывести все делители этого числа.
+// Написать функцию, которая принимает три отдельные цифры и превращает их в одно число. 
+//Например: цифры 1, 4, 9 превратятся в число 149.
 
-function func3() {
+function func3(num1, num2, num3) {
+    return Number("" + num1 + num2 + num3);
+}
+
+function task3() {
     Out("Task 3:");
+    let num1 = Number(prompt("Please enter first number:"));
+    let num2 = Number(prompt("Please enter second number:"));
+    let num3 = Number(prompt("Please enter third number:"));
 
-    let num = prompt("Enter number");
-    let result = Math.abs(num);
+    Out(`${num1} + ${num2} + ${num3} = ` + func3(num1, num2, num3));
 
-    for (let result = Math.abs(num); result > 0; result--) {
-        if (!(num % result)) {
-            Out(result)
-        }
+}
+
+// Написать функцию, которая принимает длину и ширину прямоугольника
+// и вычисляет его площадь. 
+// Если в функцию передали 1 параметр, то она вычисляет площадь квадрата.
+
+function func4(length, width) {
+    if (width != undefined) {
+        return length * width;
+    } else {
+        return length * length;
     }
 
 }
 
-// Определить количество цифр в введенном числе.
-
-function func4() {
+function task4() {
     Out("Task 4:");
 
-    let num = Number(prompt("Enter number"));
-    let i, num2;
-    for (i = 1, num2 = 10; num2 < num; i++) {
-        num2 *= 10;
-    }
-    Out(`Result = ${i}`);
+    let num1 = Number(prompt("Please enter length of rectangle:"));
+    let num2 = Number(prompt("Please enter width of rectangle:"));
+
+    Out(`Rectangle with length ${num1} and width ${num2} has area ` + func4(num1, num2));
+
 }
 
-// Запросить у пользователя 10 чисел и подсчитать, 
-// сколько он ввел положительных, отрицательных и нулей. 
-// При этом также посчитать, сколько четных и нечетных. 
-// Вывести статистику на экран. 
-// Учтите, что достаточно одной переменной (не 10) для ввода чисел пользователем.
+// Написать функцию, которая проверяет, является ли переданное ей число совершенным. 
+// Совершенное число – это число, равное сумме всех своих собственных делителей.
 
-function func5() {
+function func5(num) {
+    let divisionsSum = 0;
+
+    for (let i = num - 1; i > 0; i--) {
+        if (!(num % i)) {
+            divisionsSum += i;
+        }
+
+    }
+
+    return divisionsSum == num;
+
+}
+
+function task5() {
     Out("Task 5:");
+    num = Number(prompt("Please enter number:"));
 
-    let num;
-    let plusCount = 0, minusCount = 0, zeroCount = 0, oddCount = 0, evenCount = 0;
-
-    for (let i = 0; i < 10; i++) {
-        num = Number(prompt(`Enter number ${i}:`));
-        if (num == 0) {
-            zeroCount++;
-        }
-        else if (num > 0) {
-            plusCount++;
-        }
-        else {
-            minusCount++;
-        }
-
-        if (num % 2) {
-            oddCount++;
-        }
-        else {
-            evenCount++;
-        }
+    if (func5(num)) {
+        Out(`${num} is perfect`);
     }
-
-    Out(`Statistics:<br>
-    Number of zero values: ${zeroCount}<br>
-    Number of positive values: ${plusCount}<br>
-    Number of negative values: ${minusCount}<br>
-    Number of odd values: ${oddCount}<br>
-    Number of even values: ${evenCount}`);
-
-
+    else {
+        Out(`${num} isn't perfect`);
+    }
 }
 
-// Зациклить калькулятор.
-// Запросить у пользователя 2 числа и знак, решить пример,
-// вывести результат и спросить, хочет ли он решить еще один пример.
-// И так до тех пор, пока пользователь не откажется.
+// Написать функцию, которая принимает минимальное и максимальное значения для диапазона, 
+//и выводит только те числа из диапазона, которые являются совершенными. 
+//Используйте написанную ранее функцию, чтобы узнавать, совершенное число или нет. 
 
-function func6() {
+function func6(min, max) {
+
+    if (min > max) {
+        let temp = min;
+        min = max;
+        max = temp;
+    }
+
+    for (let i = min; i < max; i++) {
+        if (func5(i)) {
+            Out(i);
+        }
+    }
+}
+
+
+function task6() {
     Out("Task 6:");
 
-    let repeat = true, num1, num2, action;
+    let num1 = Number(prompt("Please enter first number:"));
+    let num2 = Number(prompt("Please enter second number:"));
 
-    while (repeat) {
-        num1 = Number(prompt("Please enter first number"));
-        num2 = Number(prompt("Please enter second number"));
-        action = prompt("Please choose action\n + Add\n - Substract\n * Multiply\n / Divide");
-
-        switch (action) {
-            case "+":
-                Out(`${num1} + ${num2} = ${num1 + num2}`);
-                break;
-
-            case "-":
-                Out(`${num1} - ${num2} = ${num1 - num2}`);
-                break;
-
-            case "*":
-                Out(`${num1} * ${num2} = ${num1 * num2}`);
-                break;
-
-            case "/":
-                Out(`${num1} / ${num2} = ${num1 / num2}`);
-                break;
-
-
-
-            default:
-                Out("Wrong action")
-                break;
-        }
-
-        repeat = Number(prompt("Repeat?\n 1 - Yes\n 0 - No"));
-    }
-
-
-
+    func6(num1, num2)
 
 }
 
-// Запросить у пользователя число и на сколько цифр его сдвинуть. 
-// Сдвинуть цифры числа и вывести результат 
-// (если число 123456 сдвинуть на 2 цифры, то получится 345612).
+// Написать функцию, которая принимает время (часы, минуты, секунды) 
+//и выводит его на экран в формате «чч:мм:сс».
+//Если при вызове функции минуты и/или секунды не были переданы, то выводить их как 00.
 
-function func7() {
+function getTimeStr(hour, minute, second) {
+    let time = '"';
+
+    if (hour != undefined) {
+        time += hour + ":";
+    } else {
+        time += "00:";
+    }
+
+    if (minute != undefined) {
+        time += minute + ":";
+    } else {
+        time += "00:";
+    }
+
+    if (second != undefined) {
+        time += second + '"';
+    } else {
+        time += "00:";
+    }
+
+    return time;
+}
+
+function func7(hour, minute, second) {
+    Out(getTimeStr(hour, minute, second));
+}
+
+function task7() {
     Out("Task 7:");
-    let numIn = String(prompt("Please enter number"));
-    let shift = Number(prompt("Please enter shift"));
-    let numOut = "";
 
-    for (let i = shift; i < (numIn.length); i++) {
-        numOut += numIn[i];
-    }
+    let hour = prompt("Please enter hour");
+    let minute = prompt("Please enter minute");
+    let second = prompt("Please enter second");
 
-    for (let i = 0; i < shift; i++) {
-        numOut += numIn[i];
-    }
-    Out(`Initial number = ${numIn}`);
-    Out(`Shift = ${shift}`);
-    Out(`Result = ${numOut}`);
+    func7(hour, minute, second);
 
 }
 
-// Зациклить вывод дней недели таким образом: «День недели. 
-// Хотите увидеть следующий день?» и так до тех пор, пока пользователь нажимает OK.
+// Написать функцию, которая принимает часы, минуты и секунды 
+// и возвращает это время в секундах.
 
-function func8() {
+function func8(hour, minute, second) {
+    return (hour * 3600) + (minute * 60) + second;
+}
+
+function task8() {
     Out("Task 8:");
 
-    let repeat = true;
-    let today = new Date;
-    let daynum = today.getDay();
-    let daystr;
+    let hour = Number(prompt("Please enter hour"));
+    let minute = Number(prompt("Please enter minute"));
+    let second = Number(prompt("Please enter second"));
 
-    while (repeat) {
-
-        switch (daynum) {
-            case 0:
-                daystr = "Sunday";
-                break;
-
-            case 1:
-                daystr = "Monday";
-                break;
-
-            case 2:
-                daystr = "Tuesday";
-                break;
-
-            case 3:
-                daystr = "Wednesday";
-                break;
-
-            case 4:
-                daystr = "Thursday";
-                break;
-
-            case 5:
-                daystr = "Friday";
-                break;
-
-            case 6:
-                daystr = "Saturday";
-                break;
-
-            case 7:
-                daystr = "Sunday";
-                daynum = 0;
-                break;
-
-            default:
-                break;
-        }
-
-        repeat = (Number(prompt(`Week day is ${daystr}. See next?\n 1 - Yes    0 - No`)));
-
-        daynum++;
-    }
-
+    Out(func8(hour, minute, second));
 
 }
 
-// Вывести таблицу умножения для всех чисел от 2 до 9. 
-// Каждое число необходимо умножить на числа от 1 до 10.
+// Написать функцию, которая принимает количество секунд, 
+//переводит их в часы, минуты и секунды и возвращает в виде строки «чч:мм:сс».
 
-function func9() {
+function func9(seconds) {
+    let hours = 0, minutes = 0;
+
+    while (((hours + 1) * 3600) < seconds) {
+        hours++;
+    }
+    seconds = seconds - (hours * 3600);
+
+    while (((minutes + 1) * 60) < seconds) {
+        minutes++;
+    }
+    seconds = seconds - (minutes * 60);
+
+    return getTimeStr(hours, minutes, seconds);
+}
+
+function task9() {
     Out("Task 9:");
 
-    for (let i = 2; i <= 9; i++) {
-        Out(`Multiplication table for ${i}`);
-
-        for (let j = 1; j <= 10; j++) {
-            Out(`${i} x ${j} = ${i * j}`);
-
-        }
-        Out("");
-    }
-
+    let time = Number(prompt("Please enter time in seconds"));
+    Out("The time is " + func9(time));
 
 }
 
-// Игра «Угадай число».
-// Предложить пользователю загадать число от 0 до 100 и отгадать его следующим способом:
-// каждую итерацию цикла делите диапазон чисел пополам,
-// записываете результат в N и спрашиваете у пользователя «Ваше число > N, < N или == N ?».
-// В зависимости от того, что указал пользователь, уменьшаете диапазон.
-// Начальный диапазон от 0 до 100, поделили пополам и получили 50.
-// Если пользователь указал, что его число > 50, то изменили диапазон на от 51 до 100. 
-// И так до тех пор, пока пользователь не выберет == N.
+// Написать функцию, которая считает разницу между датами. 
+//Функция принимает 6 параметров, которые описывают 2 даты, 
+//и возвращает результат в виде строки «чч:мм:сс». 
+//При выполнении задания используйте функции из предыдущих 2-х заданий: 
+//сначала обе даты переведите в секунды, узнайте разницу в секундах, 
+//а потом разницу переведите обратно в «чч:мм:сс»
+
+function func10(hours1, minutes1, seconds1, hours2, minutes2, seconds2) {
+    return func9(Math.abs(func8(hours1, minutes1, seconds1) - func8(hours2, minutes2, seconds2)));
+}
 
 
-function func10() {
+function task10() {
     Out("Task 10:");
-    Out("Please choose a number between 0 and 100");
-    let guess = true;
-    let left = 0, right = 100;
-    let num;
 
-    while (guess) {
-        num = Math.trunc((left + right) / 2);
+    let hours1 = Number(prompt("Please enter hours for first date"));
+    let minutes1 = Number(prompt("Please enter minutes for first date"));
+    let seconds1 = Number(prompt("Please enter seconds for first date"));
+    let hours2 = Number(prompt("Please enter hours for second date"));
+    let minutes2 = Number(prompt("Please enter minutes for second date"));
+    let seconds2 = Number(prompt("Please enter seconds for second date"));
 
-        guess = Number(prompt(`Is your number ${num}\n 1 - It's bigger than ${num}\n 2 - It's smaller than ${num}\n 0 -It's ${num}`));
-
-        switch (guess) {
-            case 1:
-                left = num;
-                break;
-            case 2:
-                right = num;
-                break;
-
-            default:
-                break;
-        }
-
-    }
-
-    Out(`The answer is ${num}`);
+    Out("Time difference is: " + func10(hours1, minutes1, seconds1, hours2, minutes2, seconds2));
 
 
 }
