@@ -145,10 +145,17 @@ function func6(min, max) {
         max = temp;
     }
 
+    let counter = 0;
+
     for (let i = min; i < max; i++) {
         if (func5(i)) {
             Out(i);
+            counter++;
         }
+    }
+
+    if (!counter) {
+        Out("No fitting numbers found");
     }
 }
 
